@@ -5,6 +5,7 @@ namespace Rap2hpoutre\FastExcel;
 use Box\Spout\Writer\Style\Style;
 use Box\Spout\Writer\WriterFactory;
 use Illuminate\Support\Collection;
+use Box\Spout\Writer\Style\StyleBuilder;
 
 /**
  * Trait Exportable.
@@ -87,6 +88,10 @@ trait Exportable
      */
     private function exportOrDownload($path, $function, callable $callback = null)
     {
+        $style = (new StyleBuilder())
+                ->setFontSize(11)
+                ->setFontName('Calibri')
+                ->build();
         $writer = WriterFactory::create($this->getType($path));
         $this->setOptions($writer);
         /* @var \Box\Spout\Writer\WriterInterface $writer */
@@ -117,7 +122,7 @@ trait Exportable
                         $writer->addRow($keys);
                     }
                 }
-                $writer->addRows($collection->toArray());
+                $writer->addRowsWithStyle($collection->toArray(),$style);
             }
             if (is_string($key)) {
                 $writer->getCurrentSheet()->setName($key);
