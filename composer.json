@@ -4,7 +4,7 @@
   "keywords": ["laravel", "excel", "csv", "xls", "xlsx"],
   "require": {
     "php": "^7.0",
-    "laravel/framework": "5.0.16",
+    "laravel/framework": "5.0.16|5.0.33",
     "box/spout": "^2.7"
   },
   "require-dev": {
